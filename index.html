@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ника</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           ЦВЕТОВАЯ ПАЛИТРА — ВЕСНА + БИРЮЗА
+           ═══════════════════════════════════════ */
+        :root {
+            --teal:        #00897B;
+            --teal-dark:   #00695C;
+            --teal-light:  #4DB6AC;
+            --teal-pale:   #B2DFDB;
+            --teal-bg:     #E0F2F1;
+            --spring-green:#66BB6A;
+            --spring-lime: #AED581;
+            --spring-pink: #F48FB1;
+            --spring-peach:#FFCC80;
+            --spring-lavender:#CE93D8;
+            --white:       #FFFFFF;
+            --text:        #2E4A46;
+            --text-light:  #5D7B77;
+            --shadow:      rgba(0,105,92,0.12);
+        }
+
+        /* ═══════════════════════════════════════
+           БАЗОВЫЕ СТИЛИ
+           ═══════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Comfortaa', 'Segoe UI', system-ui, sans-serif;
+            color: var(--text);
+            background: var(--teal-bg);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .handwritten {
+            font-family: 'Caveat', 'Segoe Script', cursive;
+        }
+
+        /* ═══════════════════════════════════════
+           ДЕКОРАТИВНЫЙ ФОН — ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ
+           ═══════════════════════════════════════ */
+        .floating-decor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10%  { opacity: 0.15; }
+            90%  { opacity: 0.15; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ═══════════════════════════════════════
+           HERO СЕКЦИЯ
+           ═══════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #FAFCFB;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23E0F2F1' d='M0,64 C360,120 720,0 1080,64 C1260,96 1380,80 1440,64 L1440,120 L0,120Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        /* Акварельные пятна */
+        .hero-watercolor {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-watercolor .wc-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.45;
+            animation: wcFloat 8s ease-in-out infinite alternate;
+        }
+
+        .hero-watercolor .wc1 {
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, #F8BBD0 0%, #F48FB1 40%, transparent 70%);
+            top: -5%; left: -3%;
+            animation-delay: 0s;
+        }
+        .hero-watercolor .wc2 {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, #B2EBF2 0%, #4DB6AC 40%, transparent 70%);
+            top: 5%; right: 2%;
+            animation-delay: 1.5s;
+        }
+        .hero-watercolor .wc3 {
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, #FFF9C4 0%, #FFD54F 40%, transparent 70%);
+            top: 55%; right: 8%;
+            animation-delay: 3s;
+        }
+        .hero-watercolor .wc4 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #E1BEE7 0%, #CE93D8 40%, transparent 70%);
+            bottom: 5%; left: 5%;
+            animation-delay: 2s;
+        }
+        .hero-watercolor .wc5 {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, #C8E6C9 0%, #81C784 40%, transparent 70%);
+            top: 30%; left: 15%;
+            animation-delay: 4s;
+        }
+        .hero-watercolor .wc6 {
+            width: 260px; height: 260px;
+            background: radial-gradient(circle, #FFCCBC 0%, #FF8A65 40%, transparent 70%);
+            bottom: 20%; right: -2%;
+            animation-delay: 1s;
+        }
+        .hero-watercolor .wc7 {
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, #B3E5FC 0%, #4FC3F7 40%, transparent 70%);
+            top: 15%; left: 40%;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes wcFloat {
+            0%   { transform: translate(0, 0) scale(1); }
+            50%  { transform: translate(15px, -10px) scale(1.08); }
+            100% { transform: translate(-10px, 12px) scale(0.95); }
+        }
+
+        .hero h1 {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 700;
+            color: var(--teal-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 .highlight {
+            color: var(--teal);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--spring-pink), var(--teal-light), var(--spring-green));
+            border-radius: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .subtitle-heart {
+            display: inline-block;
+            color: var(--teal);
+            font-size: 1.2em;
+            margin-left: 0.3rem;
+            animation: subtitleHeartbeat 2s ease-in-out infinite;
+            position: relative;
+            top: 0.05em;
+        }
+
+        @keyframes subtitleHeartbeat {
+            0%, 100% { transform: scale(1); }
+            25%      { transform: scale(1.15); }
+            50%      { transform: scale(1); }
+            75%      { transform: scale(1.1); }
+        }
+
+        .hero .dedication {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--teal);
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 140px;
+            z-index: 2;
+            animation: bounce 2s ease-in-out infinite;
+            font-size: 1.5rem;
+            color: var(--teal-light);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(10px); }
+        }
+
+        /* ═══════════════════════════════════════
+           НАВИГАЦИЯ TIMELINE
+           ═══════════════════════════════════════ */
+        .timeline-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--teal-pale);
+            padding: 0.6rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-year-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--teal);
+            font-weight: 600;
+            margin: 0 0.5rem;
+            white-space: nowrap;
+        }
+
+        .nav-separator {
+            width: 1px;
+            height: 20px;
+            background: var(--teal-pale);
+            margin: 0 0.3rem;
+        }
+
+        .timeline-nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .timeline-nav a:hover {
+            color: var(--teal);
+            background: var(--teal-bg);
+            border-color: var(--teal-pale);
+        }
+
+        .timeline-nav a.active {
+            color: var(--white);
+            background: var(--teal);
+            border-color: var(--teal);
+        }
+
+        /* ═══════════════════════════════════════
+           РАЗДЕЛИТЕЛЬ ГОДА
+           ═══════════════════════════════════════ */
+        .year-divider {
+            text-align: center;
+            padding: 3rem 1.5rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .year-divider h2 {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--teal-dark);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .year-divider .line {
+            display: inline-block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal-light), transparent);
+            vertical-align: middle;
+        }
+
+        /* ═══════════════════════════════════════
+           СЕКЦИИ МЕСЯЦЕВ
+           ═══════════════════════════════════════ */
+        .month-section {
+            position: relative;
+            padding: 4rem 1.5rem;
+            z-index: 1;
+        }
+
+        .month-section:nth-child(odd)  { background: var(--teal-bg); }
+        .month-section:nth-child(even) { background: var(--white); }
+
+        .month-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .month-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .month-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 70px;
+            height: 70px;
+            padding: 0 1rem;
+            border-radius: 35px;
+            background: linear-gradient(135deg, var(--teal), var(--teal-light));
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .month-title {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 600;
+            color: var(--teal-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .month-caption {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════
+           ФОТО/ВИДЕО ГАЛЕРЕЯ — СЕТКА
+           ═══════════════════════════════════════ */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .media-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--white);
+            box-shadow: 0 4px 20px var(--shadow);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+        }
+
+        .media-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .media-card:hover {
+            transform: translateY(-4px) scale(1.015);
+            box-shadow: 0 8px 30px rgba(0,105,92,0.2);
+        }
+
+        .media-card .media-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            background: var(--teal-pale);
+        }
+
+        .media-card img,
+        .media-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Значок видео поверх превью */
+        .video-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(0,137,123,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+            pointer-events: none;
+        }
+
+        .video-badge::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent white;
+            margin-left: 3px;
+        }
+
+        .media-card:hover .video-badge {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(0,137,123,1);
+        }
+
+        /* Длительность видео */
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .media-card .photo-caption {
+            padding: 0.8rem 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            color: var(--text);
+            text-align: center;
+            min-height: 2.5rem;
+        }
+
+        /* Плейсхолдер для видео (не грузим до клика) */
+        .video-placeholder {
+            background: linear-gradient(135deg, var(--teal-bg) 0%, var(--teal-pale) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-play-icon {
+            font-size: 2.5rem;
+            color: var(--teal);
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        .media-wrapper {
+            position: relative;
+        }
+
+        /* Стрелки прокрутки — скрыты при сетке */
+        .gallery-arrow { display: none; }
+
+        /* ═══════════════════════════════════════
+           ТАЙМЛАЙН — КАК НИКА МЕНЯЕТСЯ
+           ═══════════════════════════════════════ */
+        .compare-section {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--teal-bg) 100%);
+        }
+
+        .compare-section .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .compare-section .section-header h2 {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--teal-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .compare-section .section-header p {
+            color: var(--text-light);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .compare-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .compare-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .compare-item .compare-photo {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .compare-item .compare-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0,105,92,0.2);
+        }
+
+        .compare-item .compare-label {
+            margin-top: 0.6rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* Линия-связь между фото */
+        .compare-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1000px;
+            margin: -0.6rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .compare-connector .line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal-pale), var(--teal-light), var(--teal-pale));
+            border-radius: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .compare-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .compare-item .compare-label { font-size: 1rem; }
+        }
+
+        @media (min-width: 601px) and (max-width: 900px) {
+            .compare-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        }
+
+        /* ═══════════════════════════════════════
+           LIGHTBOX (фото + видео)
+           ═══════════════════════════════════════ */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .lightbox.open { display: flex; }
+
+        .lightbox .lb-media {
+            max-width: 90%;
+            max-height: 78vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox .lb-media img,
+        .lightbox .lb-media video {
+            max-width: 100%;
+            max-height: 78vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+
+        .lightbox .lb-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-top: 1rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .lightbox .lb-close {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 1001;
+        }
+
+        .lightbox .lb-close:hover { background: rgba(255,255,255,0.3); }
+
+        .lightbox .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .lightbox .lb-nav:hover { background: rgba(255,255,255,0.3); }
+        .lightbox .lb-prev { left: 1.5rem; }
+        .lightbox .lb-next { right: 1.5rem; }
+
+        .lb-counter {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ═══════════════════════════════════════
+           ЦИТАТА МЕЖДУ СЕКЦИЯМИ
+           ═══════════════════════════════════════ */
+        .quote-banner {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-banner .quote-text {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--teal);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quote-banner .quote-flower {
+            font-size: 1.5rem;
+            opacity: 0.4;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* ═══════════════════════════════════════
+           ФИНАЛЬНАЯ СЕКЦИЯ
+           ═══════════════════════════════════════ */
+        .finale {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--teal-bg) 0%, var(--teal-pale) 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        .finale h2 {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--teal-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .finale .message {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .finale .heart {
+            font-size: 3rem;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            color: var(--spring-pink);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15%      { transform: scale(1.15); }
+            30%      { transform: scale(1); }
+            45%      { transform: scale(1.1); }
+        }
+
+        /* ═══════════════════════════════════════
+           ЗАГЛУШКА
+           ═══════════════════════════════════════ */
+        .placeholder-msg {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            font-size: 1rem;
+            border: 2px dashed var(--teal-pale);
+            border-radius: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .placeholder-msg .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        /* ═══════════════════════════════════════
+           АДАПТИВНОСТЬ
+           ═══════════════════════════════════════ */
+        @media (max-width: 600px) {
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+            .month-section { padding: 3rem 1rem; }
+            .media-card .photo-caption { font-size: 1rem; padding: 0.5rem 0.6rem; }
+            .lightbox .lb-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+            .lightbox .lb-prev { left: 0.5rem; }
+            .lightbox .lb-next { right: 0.5rem; }
+            .lightbox .lb-caption { font-size: 1.1rem; }
+            .timeline-nav {
+                padding: 0.5rem 0.5rem;
+                gap: 0.2rem;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .timeline-nav::-webkit-scrollbar { display: none; }
+            .timeline-nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.7rem;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+            }
+            .nav-year-label { font-size: 0.85rem; margin: 0 0.3rem; }
+            .compare-connector { padding: 0 1rem; }
+            .hero { padding: 1.5rem 1rem; }
+        }
+
+        /* Очень маленькие экраны */
+        @media (max-width: 420px) {
+            .gallery { grid-template-columns: 1fr; gap: 0.5rem; }
+            .media-card .photo-caption { font-size: 0.9rem; }
+            .compare-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            .lightbox .lb-nav { width: 34px; height: 34px; font-size: 1rem; }
+            .lightbox .lb-prev { left: 0.3rem; }
+            .lightbox .lb-next { right: 0.3rem; }
+            .lightbox .lb-close { top: 0.8rem; right: 0.8rem; }
+            .month-header .month-number { font-size: 2.5rem; }
+        }
+
+        @media (min-width: 601px) and (max-width: 900px) {
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 901px) {
+            .gallery { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Убираем hover-эффекты на тач-устройствах */
+        @media (hover: none) {
+            .media-card:hover { transform: none; box-shadow: 0 3px 15px var(--shadow); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ДЕКОРАТИВНЫЕ ПЛАВАЮЩИЕ ЭЛЕМЕНТЫ -->
+<div class="floating-decor" id="floatingDecor"></div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-watercolor">
+        <div class="wc-blob wc1"></div>
+        <div class="wc-blob wc2"></div>
+        <div class="wc-blob wc3"></div>
+        <div class="wc-blob wc4"></div>
+        <div class="wc-blob wc5"></div>
+        <div class="wc-blob wc6"></div>
+        <div class="wc-blob wc7"></div>
+    </div>
+    <h1>
+        <span class="highlight">Ника</span>
+    </h1>
+    <p class="subtitle">
+        Маленькая история большого счастья <span class="subtitle-heart">&#x2764;</span>
+    </p>
+    <div class="scroll-hint">&#x25BD;</div>
+</section>
+
+<!-- НАВИГАЦИЯ — генерируется автоматически из CONFIG -->
+<nav class="timeline-nav" id="timelineNav"></nav>
+
+<!-- ТАЙМЛАЙН СРАВНЕНИЯ — КАК НИКА МЕНЯЕТСЯ (выжимка всех разделов) -->
+<section class="compare-section" id="compareSection">
+    <div class="section-header fade-in">
+        <h2>Смотри, как я расту!</h2>
+        <p>От первого дня до пяти месяцев — одна маленькая большая история</p>
+    </div>
+    <div class="compare-grid" id="compareGrid"></div>
+</section>
+
+<!-- КОНТЕНТ — генерируется автоматически из CONFIG -->
+<main id="mainContent"></main>
+
+<!-- ФИНАЛ -->
+<section class="finale fade-in" id="finale">
+    <h2>Это только начало!</h2>
+    <p class="message">
+        Эти месяцы — лишь первая глава.
+        Впереди первые шаги, первые слова и много-много новых приключений.
+        <br><br>
+        Ника растёт и каждый день дарит нам счастье!
+    </p>
+    <div class="heart">&#x1F49A;</div>
+</section>
+
+<!-- LIGHTBOX (фото + видео) -->
+<div class="lightbox" id="lightbox">
+    <button class="lb-close" onclick="closeLightbox()">&#x2715;</button>
+    <button class="lb-nav lb-prev" onclick="navigateLB(-1)">&#x276E;</button>
+    <button class="lb-nav lb-next" onclick="navigateLB(1)">&#x276F;</button>
+    <div class="lb-media" id="lbMedia"></div>
+    <div class="lb-caption" id="lbCaption"></div>
+    <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script>
+/* ═════════════════════════════════════════════════════════════════
+   ██  НАСТРОЙКА — РЕДАКТИРУЙТЕ ЗДЕСЬ!  ██
+   ═════════════════════════════════════════════════════════════════
+
+   СТРУКТУРА:
+   ----------
+   CONFIG.timeline — массив периодов (годов/этапов).
+   Каждый период содержит массив months.
+   Каждый month содержит массив media (фото + видео).
+
+   КАК ДОБАВИТЬ ФОТО:
+   1. Положите файл в папку photos/1/ (или photos/2/ и т.д.)
+   2. Добавьте строку:  { src: "photos/1/имя.jpg", caption: "Занята важным делом — расту" },
+   3. Необязательно добавьте caption: "Подпись"
+
+   КАК ДОБАВИТЬ ВИДЕО:
+   1. Положите видео в ту же папку (photos/1/)
+   2. Добавьте строку:  { src: "photos/1/видео.mp4", type: "video", caption: "Когда тебе 5 месяцев, но харизма уже на 25" },
+   3. Необязательно:
+      - poster: "photos/1/обложка.jpg"  (картинка-превью)
+      - caption: "Подпись к видео"
+
+   КАК ДОБАВИТЬ НОВЫЙ МЕСЯЦ:
+   Просто добавьте новый объект в массив months нужного периода.
+
+   КАК ДОБАВИТЬ НОВЫЙ ГОД/ПЕРИОД:
+   Добавьте новый объект в массив timeline (см. пример "Второй год").
+
+   Форматы: .jpg .jpeg .png .webp .mp4 .mov .webm
+   ═════════════════════════════════════════════════════════════════ */
+
+const CONFIG = {
+    timeline: [
+        {
+            yearLabel: "Первый год",
+            months: [
+                {
+                    id: "roddom",
+                    label: "Роддом",
+                    title: "Здравствуй, Ника!",
+                    caption: "Самый первый день самой важной истории.",
+                    media: [
+            
+                        { src: "photos/Роддом/5440553971879115683.jpg", caption: "Ура! новый человечек вошёл в этот мир" },
+                        { src: "photos/Роддом/5440553971879115756.jpg",caption: "Сегодня в меню: молочко и обнимашки" },
+                        { src: "photos/Роддом/5440906146312484859.jpg", caption: "Хорошо у мамы на груди" },
+                        { src: "photos/Роддом/5440906146312484863.jpg", caption: "С интересом смотрю на мир" },
+
+                        { src: "photos/Роддом/5440906146312484870.jpg", caption: "Маленькая, но уже с характером" },
+                       
+                        { src: "photos/Роддом/5440906146312484886.jpg", caption: "Столько цифр, и все про меня" },
+                        { src: "photos/Роддом/5440906146312484889.jpg", caption: "Смотрю свои первые сны" },
+                        { src: "photos/Роддом/5440906146312484897.jpg", caption: "Здесь я родилась!" },
+                        { src: "photos/Роддом/5440906146312484899.jpg", caption: "Связаны навеки" },
+                        { src: "photos/Роддом/5440906146312484903.jpg", caption: "Наконец-то мы с тобой увиделись" },
+                      
+                        { src: "photos/Роддом/5440906146312484905.jpg", caption: "Я  и спящая могу всех очаровать" },
+                        { src: "photos/Роддом/5440906146312484906.jpg", caption: "Самый вкусно пахнущий малыш" },
+                        { src: "photos/Роддом/5442805771692800517.jpg", caption: "Спать или не спать? Конечно, не спать!" },
+                        { src: "photos/Роддом/5442805771692800518.jpg", caption: "Скоро все узнают, какая я классная" },
+                        { src: "photos/Роддом/5445359078210665355.jpg", caption: "Отдыхаю после тяжёлого дня (лежала, ела, была милой)" },
+                        { src: "photos/Роддом/5445359078210665866.jpg", caption: "Самые сладкие щечки" },
+                        { src: "photos/Роддом/5440479694714698949.jpg", caption: "Мечтаю о молочке... или о мировом господстве" },
+                        { src: "photos/Роддом/5440479694714698950.jpg", caption: "У папы на ручках всегда хорошо" },
+                        { src: "photos/Роддом/video5440553971422891080.mp4", type: "video", caption: "Философский взгляд на мир (и на потолок)" },
+                        { src: "photos/Роддом/video5440906145856259696.mp4", type: "video", caption: "Маленькие ручки, большое счастье" },
+                        { src: "photos/Роддом/video5440906145856259698.mp4", type: "video", caption: "Я родилась среди огоньков" },
+                        { src: "photos/Роддом/video5440906145856259891.mp4", type: "video", caption: "Первые часы жизни" },
+                    ]
+                },
+                {
+                    id: "month1",
+                    label: "1 мес",
+                    title: "Привет, мир!",
+                    caption: "Только появилась — и уже звезда!",
+                    media: [
+                        { src: "photos/1/5201767486872222467.jpg", caption: "Мама зря времени не теряет - тренируется!" },
+                        { src: "photos/1/5201807812320164087.jpg", caption: "Опять понесли куда-то..." },
+                        { src: "photos/1/5204019286685907807.jpg", caption: "Всем рок!!!" },
+                        { src: "photos/1/5204019286685907949.jpg", caption: "Моменты нежности" },
+                        { src: "photos/1/5208617646180470976.jpg", caption: "Профессиональная модель. Опыт работы — 1 неделя" },
+                        { src: "photos/1/5213184102654218483.jpg", caption: "Вся семья за столом" },
+                        { src: "photos/1/5220208899623947790.jpg", caption: "Такая маленькая, а уже помогаю папе с бизнесом" },
+                        { src: "photos/1/5228852688810872590.jpg", caption: "Сложно быть мамой: все от тебя чего-то хотят)" },
+                        { src: "photos/1/5242471888372567682.jpg", caption: "Когда ты маленький — весь мир большой и интересный" },
+                        { src: "photos/1/5242471888372567683.jpg", caption: "Зевать — это искусство, если делать это мило" },
+                        { src: "photos/1/5242471888372567684.jpg", caption: "Занята важным делом — расту" },
+                        { src: "photos/1/5242471888372567685.jpg", caption: "Пока не говорю, но уже все понимаю" },
+                        { src: "photos/1/5242471888372567686.jpg", caption: "Девочка конфетка" },
+                        { src: "photos/1/5242471888372567687.jpg", caption: "Тренирую голос для первых слов" },
+                        { src: "photos/1/5246789734959352826.jpg", caption: "Потягууууушки" },
+                        { src: "photos/1/5246789734959353597.jpg", caption: "Взгляд, который растопит любое сердце" },
+                        { src: "photos/1/5257976127605640092.jpg", caption: "Сплю как ангел, когда катаюсь в колясочке" },
+                        { src: "photos/1/5257976127605641193.jpg", caption: "Пришла с прогулки и ещё немного не проснулась" },
+                        { src: "photos/1/5257976127605641260.jpg", caption: "Кто тут у нас такой серьёзный?" },
+                        { src: "photos/1/5257976127605641261.jpg", caption: "Сладкая принцесса" },
+                        { src: "photos/1/5257976127605641286.jpg", caption: "Легкая как облачко" },
+                        { src: "photos/1/5257976127605641287.jpg", caption: "Еще немного и полечу" },
+                        { src: "photos/1/5257976127605641288.jpg", caption: "Я ещё маленькая, но уже фотогеничная" },
+                        { src: "photos/1/5267053575345474665.jpg", caption: "Осенние прогулки с коляской - это красиво" },
+                        { src: "photos/1/5273735663989754851.jpg", caption: "Мечтаю... о чём мечтают малыши?" },
+                        { src: "photos/1/5276355001334828830.jpg", caption: "Говорят я похожа на папу" },
+                        { src: "photos/1/5276355001334828831.jpg", caption: "Эти щёчки — национальное достояние" },
+                        { src: "photos/1/5276355001334828832.jpg", caption: "Нежный сон младенца" },
+                        { src: "photos/1/5289892931525348793.jpg", caption: "Уже начинаю держать головку" },
+                        { src: "photos/1/5458472442294045145 (1).jpg", caption: "Этими щечками можно восхищаться бесконечно" },
+                        { src: "photos/1/5458472442294045146.jpg", caption: "Мама, а что это за штука? (про камеру)" },
+                        { src: "photos/1/5458472442294045147.jpg", caption: "Уютно и тепло — что ещё нужно?" },
+                        { src: "photos/1/5458472442294045149.jpg", caption: "Ловлю солнечный лучик" },
+                        { src: "photos/1/5462976041921412959.jpg", caption: "Тут все красивое: и коляска, и машина и, конечно же, мама" },
+                        { src: "photos/1/5463254682219706414.jpg", caption: "Вот это я понимаю — лежать красиво" },
+                        { src: "photos/1/5465506482033392345.jpg", caption: "Тссс, тут кто-то сладко сопит" },
+                        { src: "photos/1/5467885485893482438 (1).jpg", caption: "Любой памперс ношу изящно" },
+                        { src: "photos/1/5467885485893482624.jpg", caption: "А вы тоже делаете такое лицо после еды?" },
+                        { src: "photos/1/5467885485893482625.jpg", caption: "Позирую для бабушки — она просила фоточку" },
+                        { src: "photos/1/5467885485893482626.jpg", caption: "Могу быть милой даже когда хмурюсь" },
+                        { src: "photos/1/5467885485893482627.jpg", caption: "Когда подгузник чистый — жизнь прекрасна" },
+                        { src: "photos/1/5467885485893482628.jpg", caption: "Тренирую мимику для будущих капризов" },
+                        { src: "photos/1/5467885485893482629.jpg", caption: "Кажется, это называется «фотосессия»?" },
+                        { src: "photos/1/5467885485893482630.jpg", caption: "Только проснулась — и сразу в кадр" },
+                        { src: "photos/1/5467885485893482631.jpg", caption: "Мой любимый ракурс — все ракурсы" },
+                        { src: "photos/1/5467885485893483050.jpg", caption: "Гуляем дружной компанией" },
+                        { src: "photos/1/5471951058986206030.jpg", caption: "Во сне готовлюсь покорять второй месяц жизни" },
+                        { src: "photos/1/video5204019286229681836.mp4", type: "video", caption: "С мамой классно" },
+                        { src: "photos/1/video5217957099350295741.mp4", type: "video", caption: "Слушаю бардов с первых дней жизни" },
+                        { src: "photos/1/video5219766221179751977.mp4", type: "video", caption: "Зажигаю с папой" },
+                        { src: "photos/1/video5253806830592754605.mp4", type: "video", caption: "Знакомство с зайчиком" },
+                        { src: "photos/1/video5289892931065384963.mp4", type: "video", caption: "Смотри, как умею!" },
+                        { src: "photos/1/video5458472441837817814.mp4", type: "video", caption: "Активно шебуршусь" },
+                    ]
+                },
+                {
+                    id: "month2",
+                    label: "2 мес",
+                    title: "Осваиваюсь!",
+                    caption: "Два месяца в деле. Освоено: есть, спать, покорять сердца. Экспертный уровень.",
+                    media: [
+                        { src: "photos/2/5292144731339033989.jpg", caption: "Два месяца — полёт нормальный!" },
+                        { src: "photos/2/5292265312545869849.jpg", caption: "В коконе лежать тепло и уютно" },
+                        { src: "photos/2/5292265312545869850.jpg", caption: "Дрыгаю ножками - попробуй поймай!" },
+                        { src: "photos/2/5292265312545869851.jpg", caption: "Оттачиваю искусство быть обаятельной" },
+                        { src: "photos/2/5296628518282268001.jpg", caption: "Впервые уснула на животике" },
+                        { src: "photos/2/5296701433942051696.jpg", caption: "Мой кокон — мой трон" },
+                        { src: "photos/2/5298880318095954056.jpg", caption: "Ура, освоила бутылочку!" },
+                        { src: "photos/2/5305296509609905130.jpg", caption: "Мир за окном — целое приключение" },
+                        { src: "photos/2/5305296509609906072.jpg", caption: "Эти двое скоро подружатся" },
+                        { src: "photos/2/5307548309423591064.jpg", caption: "Подарок от Семена и Насти" },
+                        { src: "photos/2/5316583576289611950.jpg", caption: "Когда мама корчит рожи, можно и улыбнуться" },
+                        { src: "photos/2/5316875526691556449.jpg", caption: "Дайте уже этой девочке Оскар за милоту" },
+                        { src: "photos/2/5316883691424386141.jpg", caption: "Просто лежу, просто сияю" },
+                        { src: "photos/2/5316883691424386142.jpg", caption: "Само изящество" },
+                        { src: "photos/2/5325618297694785453.jpg", caption: "В гостях у подружки" },
+                        { src: "photos/2/5325618297694785559.jpg", caption: "Уже скоро сможем вместе играть" },
+                        { src: "photos/2/5332317660697529519.jpg", caption: "Когда-нибудь в косухе будет не только зайчик" },
+                        { src: "photos/2/5332317660697529520.jpg", caption: "Маленькая принцесса на горошине" },
+                        { src: "photos/2/5332317660697529521.jpg", caption: "Мои глаза — два маленьких озера" },
+                        { src: "photos/2/5336860632290103088.jpg", caption: "Синяя шапочка" },
+                        { src: "photos/2/5352800857948360660.jpg", caption: "Обнимашки с мамой" },
+                        { src: "photos/2/5355141567880039228.jpg", caption: "Классный гусь от Насти с Серегой" },
+                        { src: "photos/2/5364059942916133092.jpg", caption: "И зима не страшна в теплой колясочке" },
+                        { src: "photos/2/5364059942916133199.jpg", caption: "Сугробы нам не помеха для хорошей прогулки" },
+                        { src: "photos/2/5371092316208173329.jpg", caption: "Вот так выглядит абсолютное счастье" },
+                        { src: "photos/2/5377767223667134438.jpg", caption: "Едем, едем!" },
+                        { src: "photos/2/5380019023480819897.jpg", caption: "В канун нового года" },
+                        { src: "photos/2/5380019023480819898.jpg", caption: "Гуляем по местам папиного детства" },
+                        { src: "photos/2/5382270823294504566.jpg", caption: "Я теперь важная часть маминого новогоднего образа" },
+                        { src: "photos/2/5382270823294504830.jpg", caption: "Танцы возле елки" },
+                        { src: "photos/2/5382270823294504831.jpg", caption: "Главное достижение нашей семьи" },
+                        { src: "photos/2/5382270823294504832.jpg", caption: "Ура, это мой первый новый год!" },
+                        { src: "photos/2/video5303344442218942054.mp4", type: "video", caption: "Папа, кажется этот гусь нужен для другого" },
+                        { src: "photos/2/video5323671002012484169.mp4", type: "video", caption: "Разговариваю с мамой на своём языке" },
+                        { src: "photos/2/video5325618297234821080.mp4", type: "video", caption: "Привет, будем знакомы!" },
+                        { src: "photos/2/video5348037639972885355.mp4", type: "video", caption: "Играем с папой в куку" },
+                        { src: "photos/2/video5355141567420076799.mp4", type: "video", caption: "Выстраиваю первые причинно-следственые связи" },
+                    ]
+                },
+                {
+                    id: "month3",
+                    label: "3 мес",
+                    title: "Всё интереснее!",
+                    caption: "Три месяца! Мир стал интереснее, а щёчки — круглее.",
+                    media: [
+                        { src: "photos/3/5384170324120767642.jpg", caption: "Утро 1 января" },
+                        { src: "photos/3/5388880442955599441.jpg", caption: "Открыла для себя свои ручки — это же чудо!" },
+                        { src: "photos/3/5397690915528314992.jpg", caption: "С бабушкой хорошо" },
+                        { src: "photos/3/5397690915528315458.jpg", caption: "Уже пытаюсь хватать игрушки — скоро покорю мир" },
+                        { src: "photos/3/5400099318439546686.jpg", caption: "Сегодня я решила не плакать (пока получается)" },
+                        { src: "photos/3/5404695414482605091.jpg", caption: "Такие разные, но обе сладенькие" },
+                        { src: "photos/3/5404695414482605092.jpg", caption: "Привееет" },
+                        { src: "photos/3/5404695414482605093.jpg", caption: "Касание ручек" },
+                        { src: "photos/3/5406672920504897366.jpg", caption: "На прогулке: ветер, небо, коляска — романтика!" },
+                        { src: "photos/3/5409199014109973846.jpg", caption: "Примеряем новые наряды" },
+                        { src: "photos/3/5420374592028610490.jpg", caption: "Вау, можно гулять прямо на маме!" },
+                        { src: "photos/3/5420374592028610819.jpg", caption: "Теперь и сугробы не страшны" },
+                        { src: "photos/3/5422535931241106271.jpg", caption: "Читаю книжку" },
+                        { src: "photos/3/5422645641885716030.jpg", caption: "Вообще я та еще хохотунья" },
+                        { src: "photos/3/5422645641885716031.jpg", caption: "Три месяца — это вам не шутки" },
+                        { src: "photos/3/5422645641885716032.jpg", caption: "Настоящая леди" },
+                        { src: "photos/3/5422645641885716033.jpg", caption: "Ножкой эть" },
+                        { src: "photos/3/5422645641885716034.jpg", caption: "Сегодня нарядили — значит, праздник!" },
+                        { src: "photos/3/5422645641885716036.jpg", caption: "Маленькая принцесса" },
+                        { src: "photos/3/5429548792496721500.jpg", caption: "А на животике оказывается неплохо" },
+                        { src: "photos/3/5429548792496721642.jpg", caption: "Наслаждаемся зимой в лесу" },
+                        { src: "photos/3/5442779422072179956.jpg", caption: "Щёёёёёки" },
+                        { src: "photos/3/5463002236930690550.jpg", caption: "Засыпаю в самых неожиданных позах" },
+                        { src: "photos/3/5469904893620456868.jpg", caption: "Живу свою лучшую жизнь — прямо на маме" },
+                        { src: "photos/3/5469904893620456869.jpg", caption: "Все вместе в снежной сказке" },
+                        { src: "photos/3/5471974586820791720.jpg", caption: "Кайфую от игрушки" },
+                        { src: "photos/3/5471974586820791721.jpg", caption: "Улыбка - лучший подарок" },
+                        { src: "photos/3/video5384220819591300961.mp4", type: "video", caption: "Хлоп хлоп ресничками" },
+                        { src: "photos/3/video5406792199876676231.mp4", type: "video", caption: "Прогулки с коляской — серьёзный спорт" },
+                        { src: "photos/3/video5424897441239436516.mp4", type: "video", caption: "Скоро поползу!" },
+                        { src: "photos/3/video5424897441239437914.mp4", type: "video", caption: "Прогресс за 1 день" },
+                        { src: "photos/3/video5424899180701191090.mp4", type: "video", caption: "У нас тут гусь буянит" },
+                        { src: "photos/3/video5449737685243571258.mp4", type: "video", caption: "Потихоньку тренируемся" },
+                        { src: "photos/3/video5460730185886242468.mp4", type: "video", caption: "Хватаю все, до чего дотянусь" },
+                        { src: "photos/3/video5469904893160493517.mp4", type: "video", caption: "Похихикать с папой - это кайф" },
+                    ]
+                },
+                {
+                    id: "month4",
+                    label: "4 мес",
+                    title: "Мир, я иду!",
+                    caption: "Четыре месяца. Мама в шоке, папа с камерой. Все гордятся!",
+                    media: [
+                        { src: "photos/4/5192979532816780786.jpg", caption: "Хватаю всё подряд — мир надо попробовать" },
+                        { src: "photos/4/5195087979507029111.jpg", caption: "Вот мы какие с мамой" },
+                        { src: "photos/4/5197475818114845886.jpg", caption: "Морячка" },
+                        { src: "photos/4/5215679723466331071.jpg", caption: "Активно шебуршусь" },
+                        { src: "photos/4/5224208592213317388.jpg", caption: "Наша банда команда" },
+                        { src: "photos/4/5228681139227138107.jpg", caption: "Лежу на спинее — обозреваю владения" },
+                        { src: "photos/4/5228804769860753203.jpg", caption: "А кто это тут у нас такой очаровательный" },
+                        { src: "photos/4/5228804769860753205.jpg", caption: "Уже совсем большая девочка" },
+                        { src: "photos/4/5228804769860753211.jpg", caption: "С мамой уютно" },
+                        { src: "photos/4/5228804769860753218.jpg", caption: "Четыре месяца обаяния — и ни дня отдыха" },
+                        { src: "photos/4/5228804769860753220.jpg", caption: "Такая сладенькая, что хочется скушать" },
+                        { src: "photos/4/5228804769860753221.jpg", caption: "Папина девочка" },
+                        { src: "photos/4/5228804769860753223.jpg", caption: "Щекастое счастье" },
+                        { src: "photos/4/5228804769860753224.jpg", caption: "Когда мне поют — затихаю и слушаю" },
+                        { src: "photos/4/5228804769860753225.jpg", caption: "Вперед к новым впечатлениям" },
+                        { src: "photos/4/5231433517479171450.jpg", caption: "Отмечаем день влюбленных" },
+                        { src: "photos/4/5240279724179788555.jpg", caption: "Озорная и немного дерзкая" },
+                        { src: "photos/4/5240279724179788557.jpg", caption: "Штанишки мне явно к лицу" },
+                        { src: "photos/4/5242687869392982581.jpg", caption: "А за общим столом оказывается весело" },
+                        { src: "photos/4/5244939669206668258.jpg", caption: "Утром — зарядка, днём — игры, вечером — концерт" },
+                        { src: "photos/4/5246795537460172123.jpg", caption: "Солнечный цветочек" },
+                        { src: "photos/4/5246795537460172124.jpg", caption: "Готовимся к весне" },
+                        { src: "photos/4/5246795537460172126.jpg", caption: "Мамина любимица — это про меня" },
+                        { src: "photos/4/5253737338481875472.jpg", caption: "Уже сама держу бутылочку" },
+                        { src: "photos/4/5253933197580506718.jpg", caption: "На животике все комфортнее" },
+                        { src: "photos/4/video5206488505877828899.mp4", type: "video", caption: "Оперная певица" },
+                        { src: "photos/4/video5228804769400788014.mp4", type: "video", caption: "Маленькая леди" },
+                        { src: "photos/4/video5242295515080596743.mp4", type: "video", caption: "Играю с мамой — хохочу во весь голос" },
+                        { src: "photos/4/video5255775703730784843.mp4", type: "video", caption: "Нежные звуки моего голоса" },
+                        { src: "photos/4/video5262647226202626449.mp4", type: "video", caption: "А обезьяна то вкусная" },
+                    ]
+                },
+                {
+                    id: "month5",
+                    label: "5 мес",
+                    title: "Почти полгода!",
+                    caption: "Пять месяцев чистого счастья! Ника, ты уже такая большая!",
+                    media: [
+                        { src: "photos/5/5269347938285066347.jpg", caption: "В аэропорту столько огонечков!" },
+                        { src: "photos/5/5269767487870408374.jpg", caption: "Кажется грядут приключения" },
+                        { src: "photos/5/5269767487870408532.jpg", caption: "С папой и полеты не страшны" },
+                        { src: "photos/5/5271599738098751222.jpg", caption: "Сладко сплю в самолете" },
+                        { src: "photos/5/5273851537912435560.jpg", caption: "Пять месяцев крутости и обаяния" },
+                        { src: "photos/5/5274172603897681692.jpg", caption: "А здесь не скучно и можно полежать на маме" },
+                        { src: "photos/5/5276192475477382442.jpg", caption: "На море все вместе" },
+                        { src: "photos/5/5276335085571478451.jpg", caption: "На новом месте с бутылочкой в руках" },
+                        { src: "photos/5/5276335085571478785.jpg", caption: "Люблю, когда меня щекочут и папино термобелье" },
+                        { src: "photos/5/5276335085571478971.jpg", caption: "Готовлюсь покорять Сочи" },
+                        { src: "photos/5/5276335085571479364.jpg", caption: "Мой первый ресторан" },
+                        { src: "photos/5/5282919034213045012.jpg", caption: "Все так интересно и удивительно" },
+                        { src: "photos/5/5282919034213045013.jpg", caption: "Смеюсь так заразительно, что все вокруг тоже" },
+                        { src: "photos/5/5285147409275098156.jpg", caption: "Покоряем горы" },
+                        { src: "photos/5/5287477373198603288.jpg", caption: "Тянусь к игрушке — целеустремлённость с пелёнок" },
+                        { src: "photos/5/5287477373198603897.jpg", caption: "В парке под солнышком" },
+                        { src: "photos/5/5287477373198603920.jpg", caption: "Наслаждаюсь прогулкой" },
+                        { src: "photos/5/5289729173012289303.jpg", caption: "В олимпийской деревне" },
+                        { src: "photos/5/5305242036539692308.jpg", caption: "Скоро буду кушать как взрослая" },
+                        { src: "photos/5/5309885214014247386.jpg", caption: "Пять месяцев — и уже столько историй" },
+                        { src: "photos/5/5312264428327736514.jpg", caption: "Когда включили музыку — танцую всем телом" },
+                        { src: "photos/5/5312264428327736515.jpg", caption: "Вот так я смеюсь — заряд на весь день" },
+                        { src: "photos/5/5312264428327736516.jpg", caption: "Полгода не за горами — а я уже такая большая!" },
+                        { src: "photos/5/video5269347937825099288.mp4", type: "video", caption: "Скоро полетим!" },
+                        { src: "photos/5/video5283204571768851450.mp4", type: "video", caption: "Пытаюсь ползти — пока только поднимаю попу" },
+                        { src: "photos/5/video5289729172552322680.mp4", type: "video", caption: "Инголяяяяция" },
+                        { src: "photos/5/video5310217742807240069.mp4", type: "video", caption: "Есть контакт" },
+                        { src: "photos/5/video5312106476150498233.mp4", type: "video", caption: "Председатель" },
+                        { src: "photos/5/video5312106476150498236.mp4", type: "video", caption: "Папины игрища" },
+                    ]
+                },
+            ]
+        },
+
+        /* ─── РАСКОММЕНТИРУЙТЕ, КОГДА ПОНАДОБИТСЯ ───
+        {
+            yearLabel: "Второй год",
+            months: [
+                {
+                    id: "month13",
+                    label: "13 мес",
+                    title: "Уже годик!",
+                    caption: "Первый день рождения! Торт, свечка, праздник!",
+                    media: []
+                },
+            ]
+        },
+        */
+    ],
+
+    /* Фото для раздела «Как я расту» */
+    comparePhotos: [
+        { src: "photos/Timline/1. 0 дней.jpg",    label: "0 дней" },
+        { src: "photos/Timline/2. 5 дней.jpg",    label: "5 дней" },
+        { src: "photos/Timline/3. 10 дней.jpg",   label: "10 дней" },
+        { src: "photos/Timline/4. 1 месяц.jpg",   label: "1 месяц" },
+        { src: "photos/Timline/5. 2 месяца.jpg",  label: "2 месяца" },
+        { src: "photos/Timline/6. 3 месяца.jpg",  label: "3 месяца" },
+        { src: "photos/Timline/7. 4 месяца.jpg",  label: "4 месяца" },
+        { src: "photos/Timline/8. 5 месяцев.jpg", label: "5 месяцев" },
+    ],
+
+    quotes: [
+        "Маленькие пальчики — большая любовь",
+        "Счастье пахнет молочком и детской присыпкой",
+        "Дети — это цветы жизни, которые расцветают каждый день",
+        "Самое большое счастье — наблюдать, как ты растёшь",
+        "Каждый день с тобой — маленькое чудо",
+    ]
+};
+
+/* ═════════════════════════════════════════════════════════════════
+   ГЕНЕРАЦИЯ НАВИГАЦИИ
+   ═════════════════════════════════════════════════════════════════ */
+function buildNav() {
+    const nav = document.getElementById('timelineNav');
+    CONFIG.timeline.forEach((period, pIdx) => {
+        if (pIdx > 0) {
+            const sep = document.createElement('div');
+            sep.className = 'nav-separator';
+            nav.appendChild(sep);
+        }
+        if (CONFIG.timeline.length > 1) {
+            const yearSpan = document.createElement('span');
+            yearSpan.className = 'nav-year-label';
+            yearSpan.textContent = period.yearLabel;
+            nav.appendChild(yearSpan);
+        }
+        period.months.forEach(month => {
+            const a = document.createElement('a');
+            a.href = '#' + month.id;
+            a.textContent = month.label;
+            nav.appendChild(a);
+        });
+    });
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   ГЕНЕРАЦИЯ КОНТЕНТА
+   ═════════════════════════════════════════════════════════════════ */
+const allMediaData = [];
+let flatMonths = [];
+
+function isVideo(item) {
+    if (item.type === 'video') return true;
+    const ext = item.src.split('.').pop().toLowerCase();
+    return ['mp4', 'mov', 'webm', 'ogg', 'avi'].includes(ext);
+}
+
+function buildPage() {
+    const main = document.getElementById('mainContent');
+    let quoteIdx = 0;
+    let globalMonthIdx = 0;
+
+    CONFIG.timeline.forEach((period, pIdx) => {
+        // Разделитель года (если несколько периодов)
+        if (CONFIG.timeline.length > 1) {
+            const divider = document.createElement('div');
+            divider.className = 'year-divider fade-in';
+            divider.style.background = pIdx % 2 === 0 ? 'var(--teal-bg)' : 'var(--white)';
+            divider.innerHTML = `<h2><span class="line"></span> ${period.yearLabel} <span class="line"></span></h2>`;
+            main.appendChild(divider);
+        }
+
+        period.months.forEach((month, mIdx) => {
+            // Цитата-разделитель между секциями (не перед первой)
+            if (globalMonthIdx > 0) {
+                const isOdd = globalMonthIdx % 2 === 1;
+                const quoteDiv = document.createElement('div');
+                quoteDiv.className = 'quote-banner fade-in';
+                quoteDiv.style.background = isOdd ? 'var(--white)' : 'var(--teal-bg)';
+                quoteDiv.innerHTML = `
+                    <div class="quote-text">&laquo;${CONFIG.quotes[quoteIdx % CONFIG.quotes.length]}&raquo;</div>
+                    <span class="quote-flower">&#x1F33B;</span>`;
+                main.appendChild(quoteDiv);
+                quoteIdx++;
+            }
+
+            // Собираем данные для лайтбокса
+            const monthMedia = month.media.map(item => ({
+                src: item.src,
+                caption: item.caption || "",
+                isVideo: isVideo(item),
+                poster: item.poster || ''
+            }));
+            allMediaData.push(monthMedia);
+            flatMonths.push(month);
+            const dataIdx = allMediaData.length - 1;
+
+            // Секция месяца
+            const section = document.createElement('section');
+            section.className = 'month-section';
+            section.id = month.id;
+
+            let galleryHTML = '';
+            if (month.media.length === 0) {
+                galleryHTML = `
+                    <div class="placeholder-msg">
+                        <div class="icon">&#x1F4F7; &#x1F3AC;</div>
+                        Добавьте фото и видео в конфигурацию
+                    </div>`;
+            } else {
+                const cards = monthMedia.map((item, itemIdx) => {
+                    let mediaContent;
+                    if (item.isVideo) {
+                        mediaContent = `
+                            <div class="media-wrapper video-placeholder">
+                                <div class="video-play-icon">&#9654;</div>
+                                <div class="video-badge"></div>
+                            </div>`;
+                    } else {
+                        mediaContent = `
+                            <div class="media-wrapper">
+                                <img src="${item.src}" alt="Ника" loading="lazy">
+                            </div>`;
+                    }
+
+                    return `
+                        <div class="media-card" onclick="openLightbox(${dataIdx}, ${itemIdx})">
+                            ${mediaContent}
+                            <div class="photo-caption handwritten">${item.caption}</div>
+                        </div>`;
+                }).join('');
+
+                galleryHTML = `
+                    <div class="gallery-container">
+                        <button class="gallery-arrow left" onclick="event.stopPropagation(); scrollGallery(this, -1)">&#x276E;</button>
+                        <div class="gallery">${cards}</div>
+                        <button class="gallery-arrow right" onclick="event.stopPropagation(); scrollGallery(this, 1)">&#x276F;</button>
+                    </div>`;
+            }
+
+            section.innerHTML = `
+                <div class="month-header">
+                    <div class="month-number">${month.label}</div>
+                    <h2 class="month-title">${month.title}</h2>
+                    <p class="month-caption">${month.caption}</p>
+                </div>
+                ${galleryHTML}`;
+
+            main.appendChild(section);
+            globalMonthIdx++;
+        });
+    });
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   ГАЛЕРЕЯ — ПРОКРУТКА СТРЕЛКАМИ
+   ═════════════════════════════════════════════════════════════════ */
+function scrollGallery(btn, direction) {
+    const gallery = btn.parentElement.querySelector('.gallery');
+    gallery.scrollBy({ left: direction * 320, behavior: 'smooth' });
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   LIGHTBOX — ФОТО + ВИДЕО
+   ═════════════════════════════════════════════════════════════════ */
+let currentLB = { groupIdx: 0, itemIdx: 0 };
+
+function openLightbox(groupIdx, itemIdx) {
+    currentLB = { groupIdx, itemIdx };
+    const items = allMediaData[groupIdx];
+    if (!items || !items[itemIdx]) return;
+    const item = items[itemIdx];
+
+    const mediaContainer = document.getElementById('lbMedia');
+
+    // Остановить предыдущее видео если было
+    const prevVideo = mediaContainer.querySelector('video');
+    if (prevVideo) prevVideo.pause();
+
+    if (item.isVideo) {
+        mediaContainer.innerHTML = `
+            <video controls playsinline preload="auto" style="max-width:100%; max-height:78vh; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+                <source src="${item.src}" type="video/mp4">
+                Ваш браузер не поддерживает видео
+            </video>`;
+    } else {
+        mediaContainer.innerHTML = `
+            <img src="${item.src}" alt="Ника" style="max-width:100%; max-height:78vh; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">`;
+    }
+
+    document.getElementById('lbCaption').textContent = item.caption;
+    document.getElementById('lbCounter').textContent = `${itemIdx + 1} / ${items.length}`;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const mediaContainer = document.getElementById('lbMedia');
+    const video = mediaContainer.querySelector('video');
+    if (video) video.pause();
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function navigateLB(dir) {
+    // Остановить текущее видео перед переключением
+    const currentVideo = document.querySelector('#lbMedia video');
+    if (currentVideo) currentVideo.pause();
+
+    const items = allMediaData[currentLB.groupIdx];
+    let newIdx = currentLB.itemIdx + dir;
+    if (newIdx < 0) newIdx = items.length - 1;
+    if (newIdx >= items.length) newIdx = 0;
+    openLightbox(currentLB.groupIdx, newIdx);
+}
+
+// Клавиатура
+document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLB(-1);
+    if (e.key === 'ArrowRight') navigateLB(1);
+});
+
+// Клик по фону
+document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+});
+
+// Свайп на мобильных
+let touchStartX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.getElementById('lightbox').addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 50) navigateLB(diff > 0 ? -1 : 1);
+});
+
+/* ═════════════════════════════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ═════════════════════════════════════════════════════════════════ */
+function setupAnimations() {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05, rootMargin: '200px 0px' });
+
+    document.querySelectorAll('.month-header, .media-card, .fade-in, .compare-item').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   НАВИГАЦИЯ — ПОДСВЕТКА АКТИВНОГО МЕСЯЦА
+   ═════════════════════════════════════════════════════════════════ */
+function setupNavHighlight() {
+    const links = document.querySelectorAll('.timeline-nav a');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                links.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    flatMonths.forEach(m => {
+        const el = document.getElementById(m.id);
+        if (el) observer.observe(el);
+    });
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   ПЛАВАЮЩИЕ ДЕКОРАЦИИ
+   ═════════════════════════════════════════════════════════════════ */
+function createFloatingDecor() {
+    const container = document.getElementById('floatingDecor');
+    const items = ['&#x1F33F;', '&#x1F33C;', '&#x1F338;', '&#x1F33A;', '&#x1F343;', '&#x1F33B;', '&#x2618;'];
+    for (let i = 0; i < 15; i++) {
+        const el = document.createElement('div');
+        el.className = 'petal';
+        el.innerHTML = items[Math.floor(Math.random() * items.length)];
+        el.style.left = Math.random() * 100 + '%';
+        el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+        el.style.animationDuration = (12 + Math.random() * 18) + 's';
+        el.style.animationDelay = (Math.random() * 20) + 's';
+        container.appendChild(el);
+    }
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   РАЗДЕЛ СРАВНЕНИЯ — КАК НИКА РАСТЁТ
+   ═════════════════════════════════════════════════════════════════ */
+function buildCompareSection() {
+    const grid = document.getElementById('compareGrid');
+    if (!grid || !CONFIG.comparePhotos) return;
+
+    CONFIG.comparePhotos.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'compare-item';
+        div.style.transitionDelay = (idx * 0.1) + 's';
+        div.innerHTML = `
+            <img class="compare-photo" src="${item.src}" alt="${item.label}" loading="lazy"
+                 onclick="openCompareLightbox(${idx})">
+            <div class="compare-label">${item.label}</div>`;
+        grid.appendChild(div);
+    });
+}
+
+function openCompareLightbox(idx) {
+    const items = CONFIG.comparePhotos;
+    if (!items[idx]) return;
+
+    // Используем отдельную группу для сравнения
+    if (!allMediaData._compare) {
+        allMediaData._compare = items.map(p => ({
+            src: p.src,
+            caption: p.label,
+            isVideo: false,
+            poster: ''
+        }));
+    }
+
+    const mediaContainer = document.getElementById('lbMedia');
+    mediaContainer.innerHTML = `
+        <img src="${items[idx].src}" alt="${items[idx].label}"
+             style="max-width:100%; max-height:78vh; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">`;
+    document.getElementById('lbCaption').textContent = items[idx].label;
+    document.getElementById('lbCounter').textContent = `${idx + 1} / ${items.length}`;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Навигация для сравнения
+    currentLB = { groupIdx: '_compare', itemIdx: idx };
+}
+
+// Расширяем navigateLB для поддержки сравнения
+const _origNavigateLB = navigateLB;
+navigateLB = function(dir) {
+    if (currentLB.groupIdx === '_compare') {
+        const items = CONFIG.comparePhotos;
+        let newIdx = currentLB.itemIdx + dir;
+        if (newIdx < 0) newIdx = items.length - 1;
+        if (newIdx >= items.length) newIdx = 0;
+        openCompareLightbox(newIdx);
+    } else {
+        _origNavigateLB(dir);
+    }
+};
+
+/* ═════════════════════════════════════════════════════════════════
+   ИНИЦИАЛИЗАЦИЯ
+   ═════════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+    buildNav();
+    buildPage();
+    buildCompareSection();
+    setupAnimations();
+    setupNavHighlight();
+    createFloatingDecor();
+
+    // Добавляем ссылку «Как я расту» в начало навигации
+    const nav = document.getElementById('timelineNav');
+    const a = document.createElement('a');
+    a.href = '#compareSection';
+    a.textContent = 'Как я расту';
+    const sep = document.createElement('div');
+    sep.className = 'nav-separator';
+    nav.insertBefore(sep, nav.firstChild);
+    nav.insertBefore(a, nav.firstChild);
+});
+</script>
+</body>
+</html>
