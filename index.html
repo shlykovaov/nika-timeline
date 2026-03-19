@@ -569,11 +569,24 @@
         }
 
         .compare-item .compare-label {
-            margin-top: 0.6rem;
+            margin-top: 0.3rem;
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
             color: var(--teal);
             font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .compare-item .compare-stats {
+            margin-top: 0.15rem;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .compare-item .compare-stats span {
+            display: inline-block;
+            margin: 0 0.2rem;
         }
 
         /* Линия-связь между фото */
@@ -1224,14 +1237,14 @@ const CONFIG = {
 
     /* Фото для раздела «Как я расту» */
     comparePhotos: [
-        { src: "photos/Timline/1. 0 дней.jpg",    label: "0 дней" },
-        { src: "photos/Timline/2. 5 дней.jpg",    label: "5 дней" },
-        { src: "photos/Timline/3. 10 дней.jpg",   label: "10 дней" },
-        { src: "photos/Timline/4. 1 месяц.jpg",   label: "1 месяц" },
-        { src: "photos/Timline/5. 2 месяца.jpg",  label: "2 месяца" },
-        { src: "photos/Timline/6. 3 месяца.jpg",  label: "3 месяца" },
-        { src: "photos/Timline/7. 4 месяца.jpg",  label: "4 месяца" },
-        { src: "photos/Timline/8. 5 месяцев.jpg", label: "5 месяцев" },
+        { src: "photos/Timline/1. 0 дней.jpg",    label: "0 дней",     weight: "3770 г", height: "54 см" },
+        { src: "photos/Timline/2. 5 дней.jpg",    label: "5 дней",     weight: "3290 г", height: "54 см" },
+        { src: "photos/Timline/3. 10 дней.jpg",   label: "10 дней",    weight: "3440 г", height: "54 см" },
+        { src: "photos/Timline/4. 1 месяц.jpg",   label: "1 месяц",    weight: "4020 г", height: "57 см" },
+        { src: "photos/Timline/5. 2 месяца.jpg",  label: "2 месяца",   weight: "5050 г", height: "58,5 см" },
+        { src: "photos/Timline/6. 3 месяца.jpg",  label: "3 месяца",   weight: "5830 г", height: "61 см" },
+        { src: "photos/Timline/7. 4 месяца.jpg",  label: "4 месяца",   weight: "6360 г", height: "64 см" },
+        { src: "photos/Timline/8. 5 месяцев.jpg", label: "5 месяцев",  weight: "6600 г", height: "66 см" },
     ],
 
     quotes: [
@@ -1532,10 +1545,13 @@ function buildCompareSection() {
         const div = document.createElement('div');
         div.className = 'compare-item';
         div.style.transitionDelay = (idx * 0.1) + 's';
+        const statsHtml = (item.weight || item.height)
+            ? `<div class="compare-stats">${item.weight ? `<span>⚖ ${item.weight}</span>` : ''}${item.height ? `<span>📏 ${item.height}</span>` : ''}</div>`
+            : '';
         div.innerHTML = `
             <img class="compare-photo" src="${item.src}" alt="${item.label}" loading="lazy"
                  onclick="openCompareLightbox(${idx})">
-            <div class="compare-label">${item.label}</div>`;
+            <div class="compare-label">${item.label}</div>${statsHtml}`;
         grid.appendChild(div);
     });
 }
