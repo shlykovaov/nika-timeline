@@ -224,14 +224,40 @@
             position: absolute;
             bottom: 140px;
             z-index: 2;
-            animation: bounce 2s ease-in-out infinite;
-            font-size: 1.5rem;
-            color: var(--teal-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .scroll-hint-text {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--teal);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .scroll-hint-arrow {
+            font-size: 2rem;
+            color: var(--teal);
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        .scroll-hint:hover .scroll-hint-text {
+            color: var(--teal-dark);
+        }
+
+        .scroll-hint:hover .scroll-hint-arrow {
+            color: var(--teal-dark);
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(10px); }
+            50%      { transform: translateY(12px); }
         }
 
         /* ═══════════════════════════════════════
@@ -881,7 +907,10 @@
     <p class="subtitle">
         Маленькая история большого счастья <span class="subtitle-heart">&#x2764;</span>
     </p>
-    <div class="scroll-hint">&#x25BD;</div>
+    <a class="scroll-hint" href="#compareSection">
+        <span class="scroll-hint-text">Листай вниз</span>
+        <span class="scroll-hint-arrow">▽</span>
+    </a>
 </section>
 
 <!-- НАВИГАЦИЯ — генерируется автоматически из CONFIG -->
